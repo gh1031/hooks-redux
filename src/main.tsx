@@ -1,12 +1,12 @@
 import ReactDom from 'react-dom';
 import React from 'react';
-import ReduxApp from './ReduxApp';
-import HooksReduxApp from './HooksReduxApp';
+import ReduxStore from './ReduxStore';
+import HooksStore from './HooksStore';
 
 ReactDom.render(
   <React.StrictMode>
-    <HooksReduxApp />
-    {/* <ReduxApp /> */}
+    <HooksStore />
+    {/* <ReduxStore /> */}
   </React.StrictMode>,
   document.querySelector('#root')
 );
