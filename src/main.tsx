@@ -5,7 +5,7 @@ import ContextDemo from './ContextDemo';
 
 ReactDom.render(
   <React.StrictMode>
-    <App />,
+    <App />
     {/* <ContextDemo />, */}
   </React.StrictMode>,
   document.querySelector('#root')

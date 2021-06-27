@@ -9,15 +9,16 @@ import HooksStore from './hooks/HooksStore';
 export default () => {
   return (
         <ReduxStore>
-        {/* <HooksStore> */}
           <BrowserRouter>
-            <Route path="/" component={ReduxHome} exact />
+          <Route path="/" component={ReduxHome} exact />
             <Route path="/login" component={Login} exact />
-
-            {/* <Route path="/" component={HooksHome} exact />
-            <Route path="/login" component={Login} exact /> */}
           </BrowserRouter>
-        {/* </HooksStore> */}
         </ReduxStore>
+        // <HooksStore>
+        //   <BrowserRouter>
+        //     <Route path="/" component={HooksHome} exact />
+        //     <Route path="/login" component={Login} exact />
+        //   </BrowserRouter>
+        // </HooksStore>
   )
 }

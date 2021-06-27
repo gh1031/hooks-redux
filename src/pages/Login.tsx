@@ -1,12 +1,13 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-// import useDispatch from '../hooks/useDispatch';
+import Ctx from '../hooks/context';
 import request from '../xhr';
 
 const Login = function () {
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
+  // const { dispatch } = useContext(Ctx);
   const history = useHistory();
 
   function onChange(evt: ChangeEvent<HTMLInputElement>) {

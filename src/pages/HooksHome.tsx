@@ -1,10 +1,11 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import useDispatch from '../hooks/useDispatch';
+import Ctx from '../hooks/context';
 import { useSelector } from '../hooks/useSelector';
 
 export const Header = function (props) {
-  const userInfo = useSelector(state => state.userInfo)
+  const { state: { userInfo } } = useContext(Ctx);
   return (
     <div>
       欢迎：{userInfo.username || ''}
@@ -13,8 +14,8 @@ export const Header = function (props) {
 }
 
 const PlusComp = () => {
-  const count = useSelector(state => state.count);
-  const dispatch = useDispatch();
+  const { state: { count }} = useContext(Ctx);;
+  const { dispatch } = useContext(Ctx);
   return (
     <div>
       <div>PlusComp count: { count }</div>
@@ -23,18 +24,18 @@ const PlusComp = () => {
   )
 }
 const MinusComp = () => {
-  const count = useSelector(state => state.count);
-  const dispatch = useDispatch();
+  const { state: { count } } = useContext(Ctx);
+  const { dispatch } = useContext(Ctx);
   return (
     <div>
       <div>MinusComp  count: { count }</div>
-      <button onClick={() => dispatch({ type: 'PLUS', payload: 1 })}>minus</button>
+      <button onClick={() => dispatch({ type: 'MINUS', payload: 1 })}>minus</button>
     </div>
   )
 }
 
 const HooksHome = () => {
-  const userInfo = useSelector(state => state.userInfo);
+  const { state: { userInfo } } = useContext(Ctx);
 
   const history = useHistory();
   useEffect(() => {
