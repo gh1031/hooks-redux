@@ -1,29 +1,21 @@
 import { AnyAction, combineReducers } from "redux";
-
-interface WithPayloadAction  extends AnyAction {
+import userInfo from './login';
+export interface WithPayloadAction  extends AnyAction {
   payload: any;
 }
 export interface CalculateState {
   count: number;
 }
-interface OrderInfo {
-  id: string;
-  payWayDesc: string;
-  platformDesc: string;
-  recipientName: string;
-}
-
-export interface OrderState {
-  list: OrderInfo[]
+export interface UserState {
+  username: string;
 }
 export interface FullState {
   calculate: CalculateState;
-  order: OrderState;
+  userInfo: UserState
 };
 
 export default combineReducers<FullState, WithPayloadAction>({
   calculate(state = { count: 0}, action) {
-
     switch (action.type) {
       case 'INCREMENT':
         return {
@@ -39,15 +31,5 @@ export default combineReducers<FullState, WithPayloadAction>({
         return state;
     }
   },
-  order(state = { list: []}, action) {
-    switch(action.type) {
-      case 'ORDER_LIST':
-        return {
-          ...state,
-          list: action.payload
-        }
-      default:
-        return state;
-    }
-  }
+  userInfo,
 });

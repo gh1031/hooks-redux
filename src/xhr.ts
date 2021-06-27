@@ -1,18 +1,31 @@
 interface XHRConfig {
   url: string;
   method?: 'get' | 'post';
+  responseType: XMLHttpRequestResponseType;
+  headers?: { [key: string]: string};
   data?: any;
 }
 
 export default function <T extends XHRConfig>(config: T) {
   return new Promise((resolve) => {
-    const { url, method = 'get', data } = config;
+    const { url, headers, method = 'get', responseType } = config;
+    let { data } = config;
     const xhr = new XMLHttpRequest();
-    xhr.open(method, `/proxy/${url}`);
-    xhr.setRequestHeader('content-type', 'application/json');
-    xhr.addEventListener('load', function (evt) {
-      resolve(JSON.parse(evt.target.response))
+
+    if (headers['Content-Type'] === 'application/json') {
+      data = JSON.stringify(data);
+    }
+
+    xhr.open(method, `/proxy${url}`);
+    
+    Object.keys(headers).forEach(key => {
+      xhr.setRequestHeader(key, headers[key]);
     })
-    xhr.send(JSON.stringify(data))
+
+    xhr.addEventListener('loadend', function () {
+      resolve(JSON.parse(xhr.response))
+    })
+
+    xhr.send(data || null)
   })
 }

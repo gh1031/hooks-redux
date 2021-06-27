@@ -1,12 +1,12 @@
-import ReactDom from 'react-dom';
 import React from 'react';
-import ReduxStore from './ReduxStore';
-import HooksStore from './HooksStore';
+import ReactDom from 'react-dom';
+import App from './router';
+import ContextDemo from './ContextDemo';
 
 ReactDom.render(
   <React.StrictMode>
-    <HooksStore />
-    {/* <ReduxStore /> */}
+    <App />,
+    {/* <ContextDemo />, */}
   </React.StrictMode>,
   document.querySelector('#root')
 );

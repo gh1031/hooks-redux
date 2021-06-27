@@ -1,23 +1,19 @@
 import Koa from 'koa';
 import fs from 'fs';
-// const orderList = JSON.parse(
-//   await fs.readFileSync(new URL("./src/data/order.json", import.meta.url))
-// );
 
 const app = new Koa();
 
 const resolveBody = req => new Promise(r => {
-  console.log(req, 'req')
   let chunkData = "";
   req.on("data", function (chunk) {
     chunkData += chunk;
   });
   req.on("end", function () {
+    console.log(chunkData,"...")
     r(JSON.parse(chunkData || "{}"));
   }); 
 })
 const bodyPaserMiddleware = async (ctx, next) => {
-  console.log(ctx);
   const data = await resolveBody(ctx.req);
   ctx.data = data;
   await next();
@@ -33,7 +29,7 @@ const loginMiddleware = async (ctx, next) => {
     
 }
 
-app.use(bodyPaserMiddleware)
+app.use(bodyPaserMiddleware);
 app.use(loginMiddleware);
 
 app.use(async (ctx) => {
